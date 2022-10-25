@@ -153,6 +153,7 @@ func (api *APIImpl) CallBundle(ctx context.Context, txHashes []common.Hash, stat
 		if err != nil {
 			return nil, err
 		}
+                // disabled checkNonce to avoid fails if the sender has generated more transactions and the refered transaction is not the first one of the account
                 msg.SetCheckNonce(false)
 		// Execute the transaction message
 		result, err := core.ApplyMessage(evm, msg, gp, true /* refunds */, false /* gasBailout */)
